@@ -2,7 +2,7 @@
 #define ELLIPSEITEM_H
 
 #include <QQuickPaintedItem>
-//#include <QGraphicsItem>
+#include <QGraphicsItem>
 
 class EllipseItem : public QQuickPaintedItem
 {
