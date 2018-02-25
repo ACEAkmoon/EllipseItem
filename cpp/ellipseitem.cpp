@@ -33,6 +33,7 @@ void EllipseItem::paint(QPainter *painter)
     painter->restore();
 }
 
+//paintMouse -> For example, until not used
 void paintMouse(QPainter *painter)
 {
     painter->save();
