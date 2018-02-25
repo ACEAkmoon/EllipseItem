@@ -1,13 +1,12 @@
-#include "ellipseitem.h"
-
+#include "headers/ellipseitem.h"
 #include <QPainter>
-#include <QStyleOptionGraphicsItem>
+//#include <QStyleOptionGraphicsItem>
 //#include <QGraphicsItem>
 #include <QQuickPaintedItem>
 
 EllipseItem::EllipseItem(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
-
+    m_color = Qt::black;
 }
 
 /*void EllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
@@ -15,7 +14,6 @@ EllipseItem::EllipseItem(QQuickItem *parent) : QQuickPaintedItem(parent)
     painter->save();
     painter->setPen(Qt::red);
     painter->drawEllipse(option->rect);
-
     painter->restore();
 }*/
 
@@ -26,31 +24,32 @@ void EllipseItem::paint(QPainter *painter)
     QRectF rect = boundingRect();
     rect.adjust(halfPenWidth, halfPenWidth, -halfPenWidth, - halfPenWidth);
     painter->setPen(Qt::red);
+    painter->setBrush(m_color);
     painter->drawEllipse(rect);
 
+    painter->restore();
+}
 
+void paintMouse(QPainter *painter)
+{
+    painter->save();
     // Body
     painter->setBrush(Qt::green);
     painter->drawEllipse(-10, -20, 20, 40);
-
     // Eyes
     painter->setBrush(Qt::white);
     painter->drawEllipse(-10, -17, 8, 8);
     painter->drawEllipse(2, -17, 8, 8);
-
     // Nose
     painter->setBrush(Qt::black);
     painter->drawEllipse(QRectF(-2, -22, 4, 4));
-
     // Pupils
     painter->drawEllipse(QRectF(-8.0, -17, 4, 4));
     painter->drawEllipse(QRectF(4.0, -17, 4, 4));
-
     // Ears
     painter->setBrush(Qt::darkYellow);
     painter->drawEllipse(-17, -12, 16, 16);
     painter->drawEllipse(1, -12, 16, 16);
-
     // Tail
     QPainterPath path(QPointF(0, 20));
     path.cubicTo(-5, 22, -5, 22, 0, 25);
@@ -59,6 +58,19 @@ void EllipseItem::paint(QPainter *painter)
     painter->setBrush(Qt::NoBrush);
     painter->drawPath(path);
 
-
     painter->restore();
+}
+
+const QColor &EllipseItem::color() const
+{
+    return m_color;
+}
+void EllipseItem::setColor(const QColor color)
+{
+    if(m_color != color)
+    {
+        m_color = color;
+        emit colorChanged();
+        emit update();
+    }
 }
