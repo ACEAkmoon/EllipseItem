@@ -5,7 +5,7 @@
 
 //////////////////////////////////////
 //For example, signals, until not used
-#include <QQmlContext>
+//#include <QQmlContext>
 //////////////////////////////////////
 
 int main(int argc, char *argv[])
@@ -18,11 +18,18 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    /////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
     //For example, signals, until not used
-    EllipseItem ellipseitem;
-    engine.rootContext()->setContextProperty("ellipseitem", &ellipseitem);
-    /////////////////////////////////////////////////////////////////////
+    //---------------------------Example_1--------------------------------//
+    //EllipseItem ellipseitem;
+    //engine.rootContext()->setContextProperty("ellipseitem", &ellipseitem);
+    //------------------------OR-Example_2--------------------------------//
+    //EllipseItem ellipseitem;
+    //QQuickView *view = new QQuickView;
+    //QQmlContext *context = view->engine()->rootContext();
+    //engine.rootContext()->setContextProperty("ellipseitem", &ellipseitem);
+    //context->setContextProperty("ellipseitem", &ellipseitem);
+    ////////////////////////////////////////////////////////////////////////
 
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     if (engine.rootObjects().isEmpty())
