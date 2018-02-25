@@ -26,9 +26,15 @@ public:
     const QColor& color() const;
     void setColor(const QColor);
 
+protected:
+
+    void timerEvent(QTimerEvent *);
+
 signals:
 
     void colorChanged();
+    void readyChanged(int value);
+    void readyDone();
 
 public slots:
 };

@@ -35,10 +35,23 @@ Rectangle {
         color: "yellow"
         anchors.centerIn: parent
 
+        onReadyDone: color = "transparent"
+        onReadyChanged: readyStatus.text = value
+
         Text {
+            id: readyStatus
             text: qsTr("Super Ellipse Item!")
             anchors.centerIn: parent
             font.pixelSize: 25
+        }
+
+        Text {
+            text: qsTr("Super Ellipse Item!")
+            font.pixelSize: 25
+            anchors {
+                top: readyStatus.bottom
+                horizontalCenter: readyStatus.horizontalCenter
+            }
         }
 
         MouseArea {

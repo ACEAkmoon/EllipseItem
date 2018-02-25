@@ -3,8 +3,10 @@
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 
-//Artem Maksymenko
-//#include <QQmlContext>
+//////////////////////////////////////
+//For example, signals, until not used
+#include <QQmlContext>
+//////////////////////////////////////
 
 int main(int argc, char *argv[])
 {
@@ -16,9 +18,11 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    //Artem Maksymenko
-    //EllipseItem ellipseitem;
-    //engine.rootContext()->setContextProperty("ellipseitem", &ellipseitem);
+    /////////////////////////////////////////////////////////////////////
+    //For example, signals, until not used
+    EllipseItem ellipseitem;
+    engine.rootContext()->setContextProperty("ellipseitem", &ellipseitem);
+    /////////////////////////////////////////////////////////////////////
 
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     if (engine.rootObjects().isEmpty())

@@ -3,10 +3,13 @@
 //#include <QStyleOptionGraphicsItem>
 //#include <QGraphicsItem>
 #include <QQuickPaintedItem>
+#include <QTimerEvent>
+#include <QDebug>
 
 EllipseItem::EllipseItem(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
     m_color = Qt::black;
+    startTimer(20);
 }
 
 /*void EllipseItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
@@ -72,5 +75,21 @@ void EllipseItem::setColor(const QColor color)
         m_color = color;
         emit colorChanged();
         emit update();
+    }
+}
+
+void EllipseItem::timerEvent(QTimerEvent *te)
+{
+    static int ready = 0;
+
+    if(ready >= 100)
+    {
+        killTimer(te->timerId());
+        qDebug() << "ready";
+        emit readyDone();
+    } else {
+        ready++;
+        qDebug() << "readyChanged" << ready;
+        emit readyChanged(ready);
     }
 }
